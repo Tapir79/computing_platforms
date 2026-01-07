@@ -130,3 +130,5 @@ The process abstraction allows the operating system to:
 - Support concurrency, isolation, and responsiveness
 
 Understanding processes is essential for grasping how operating systems achieve **virtualization, concurrency, and persistence**, which are the core challenges addressed throughout the course.
+
+

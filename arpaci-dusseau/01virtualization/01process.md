@@ -121,7 +121,7 @@ Together, these concepts allow the OS to present a stable, efficient, and secure
 
 ---
 
-## Key Takeaway
+## Summary
 
 The process abstraction allows the operating system to:
 - Run many programs concurrently
@@ -132,3 +132,38 @@ The process abstraction allows the operating system to:
 Understanding processes is essential for grasping how operating systems achieve **virtualization, concurrency, and persistence**, which are the core challenges addressed throughout the course.
 
 
+# UNIX Process API
+
+- **Processes and PIDs**  
+  Each running program is a process identified by a unique process ID (PID).
+
+- **fork()**  
+  Creates a new process. The parent receives the child's PID; the child receives 0.  
+  The child is an almost-exact copy of the parent.
+
+- **wait() / waitpid()**  
+  Allows a parent to wait for a child to finish.  
+  Makes program output deterministic by forcing execution order.
+
+- **exec() family**  
+  Replaces the current process with a new program.  
+  Used after `fork()` to run a different executable (e.g., a shell command).
+
+- **Why fork + exec?**  
+  This separation lets the shell modify the child process before running a command  
+  (e.g., redirect I/O, set up pipes).
+
+- **I/O Redirection and Pipes**  
+  By altering file descriptors in the child before `exec()`, shells implement  
+  redirection (`>`), pipelines (`|`), and more.
+
+- **Signals and Process Control**  
+  Processes can receive signals (e.g., SIGINT, SIGTSTP) to pause, terminate, or handle events.  
+  Users can control their own processes; the superuser (root) can control all.
+
+- **Useful Tools**  
+  Commands like `ps`, `top`, `kill`, `killall` help inspect and manage processes.
+
+- **Key Idea**  
+  The UNIX process API—`fork()`, `exec()`, `wait()`—is simple, powerful, and foundational  
+  to how shells and UNIX systems operate.
